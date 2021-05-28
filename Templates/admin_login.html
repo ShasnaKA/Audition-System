@@ -1,0 +1,76 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %} Admin Login {% endblock %}
+{% block login_active %} active {% endblock %}
+
+{% block body %}
+<style>
+    login-clip{
+clip-path: polygon(100% 0, 100% 12%, 50% 26%, 0 11%, 0 0);
+    }
+
+    login-tab{
+        display:inline-block;
+    }
+
+    button{
+        background-color:green;
+    }
+
+    button a{
+        color:#fff;
+        text-decoration:none;
+    }
+
+    .btn-warning a{
+        color:blue;
+    }
+
+    .btn-primary a:hover{
+        color:yellow;
+    }
+</style>
+    <br><br><br><br><br>
+<div class="container-fluid">
+    <div class="row gx-4 login-clip" style="background-color: #fff ">
+                <div class="col-md-4">
+                    <button class="btn btn-primary form-control nav-link"><a href="{% url 'castingteam_login' %}"><strong>Casting Company</strong></a></button>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-primary form-control nav-link"><a href="{% url 'artist_login' %}"><strong>Artist</strong></a></button>
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-warning form-control nav-link"><a href="{% url 'admin_login' %}"><strong>Admin</strong></a></button>
+                </div>
+    </div>
+</div>
+<br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" style="background-image:url({% static './myapp/images/loginbg.jpg' %}) ;margin-left:4px;margin-right:6px">
+            <br><br>
+            <center><h2><b style="color: #db3b17 ">Admin Login</b></h2><hr style="color: #dc4220 ;height:5px"><em style="color:blue">{% autoescape off %} {{msg}} {% endautoescape %}</em></center><br>
+            <form name="form" role="form" action="admin_login" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="uname"><b>Username</b></label>
+                    <input type="text" name="uname" id="uname" class="form-control" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <label for="pswd"><b>Password</b></label>
+                    <input type="password" name="pswd" id="pswd" class="form-control" placeholder="Password" required>
+                </div>
+                <br>
+                <button type="submit" name="btn" id="btn" class="btn btn-success form-control"><b>Login</b></button>
+            </form>
+            <br>
+            <em><a href="#" style="color: #2d1a52 ;text-decoration:none;margin-left:3%"><u>Forgot Password?</u></a></em>
+            <br><br>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+    <br><br>
+{% endblock %}

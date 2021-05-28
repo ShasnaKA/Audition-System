@@ -1,0 +1,93 @@
+{% extends 'myapp/castingteam_base.html' %}
+{% block title %} Edit Plot{% endblock %}
+{% block call_active %} active {% endblock %}
+
+{% block body %}
+<style>
+     .formspace{
+     background: rgb(112,180,58);
+background: linear-gradient(90deg, rgba(112,180,58,1) 2%, rgba(29,253,122,1) 16%, rgba(239,252,69,1) 98%);
+    }
+</style>
+<br><br><br><br>
+<div class="container">
+    <br><br>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 formspace">
+            <br>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+
+                    <br><br>
+                    <center>
+                        <h2><b>EDIT PLOT</b></h2>
+                        {% autoescape off%} {{msg}} {% endautoescape %}
+                    </center>
+                    <br>
+
+                    <form role="form" name="form" action="castingteam_edit_plot" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="plot_emotion">Emotion to be Depicted</label>
+                            <select name="plot_emotion" id="plot_emotion" class="form-control" required>
+                                {% if plot_list.plot_emotion == 'Happy' %}
+                                    <option value="Happy" selected>Happy</option>
+                                    <option value="Sad">Sad</option>
+                                    <option value="Fear">Fear</option>
+                                    <option value="Anger">Anger</option>
+                                {% elif plot_list.plot_emotion == 'Sad' %}
+                                    <option value="Happy">Happy</option>
+                                    <option value="Sad" selected>Sad</option>
+                                    <option value="Fear">Fear</option>
+                                    <option value="Anger">Anger</option>
+                                {% elif plot_list.plot_emotion == 'Fear' %}
+                                    <option value="Happy">Happy</option>
+                                    <option value="Sad">Sad</option>
+                                    <option value="Fear" selected>Fear</option>
+                                    <option value="Anger">Anger</option>
+                                {% else %}
+                                    <option value="Happy">Happy</option>
+                                    <option value="Sad">Sad</option>
+                                    <option value="Fear">Fear</option>
+                                    <option value="Anger" selected>Anger</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="plot_desc">Plot Scene</label>
+                            <textarea name="plot_desc" id="plot_desc" class="form-control" required>{{plot_list.plot_desc}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="plot_video_duration">Video Duration</label>
+                            <input type="text" name="plot_video_duration" id="plot_video_duration" class="form-control" value="{{plot_list.plot_video_duration}}" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="hidden" name="id" value="{{plot_list.id}}">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <center>
+                                <button type="submit" name="btn1" id="btn1" class="btn btn-success form-control">UPDATE</button>
+                            </center>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <center>
+                                <button type="reset" name="btn2" id="btn2" class="btn btn-danger form-control">CANCEL</button>
+                            </center>
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+<br><br><br>
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'myapp/castingteam_base.html' %}
+{% block change_pswd_active %}active{% endblock %}
+{% block title %}Casting Team Profile Update{% endblock %}
+{% block body %}
+<style>
+  a{
+    color:#fff;
+    text-decoration:none;
+  }
+  a:hover{
+    color:#fff;
+  }
+
+  .clip{
+    clip-path: polygon(100% 0, 91% 33%, 54% 60%, 15% 35%, 0 0);
+  }
+
+  .gradient-class{
+   background: rgb(58,95,180);
+background: linear-gradient(90deg, rgba(58,95,180,1) 2%, rgba(115,29,253,1) 44%, rgba(69,202,252,1) 86%);
+  }
+
+  label{
+    color:#fff;
+    font-size:18px;
+  }
+
+</style>
+<br><br>
+<form role="form" name="frm" action="{% url 'castingteam_update_profile' %}" method="post">
+  {% csrf_token %}
+<div class="container-fluid gradient-class">
+    <br>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div id="castingteam_panel">
+        <br>
+        <div class="container-fluid" >
+        <div class="row">
+          <!--h3 class="text-center" style="color:#fff"><strong>Register As A Casting Team</strong></h3-->
+          <section style="height:30%">
+            <center><br><h2><b style="color:#fff ;font-family:'Alfa Slab One',cursive;font-family:'Russo One',sans-serif;">Casting Company - Profile Update</b></h2></center>
+          </section>
+          <center><div class="msg">{% autoescape off %} {{msg}} {% endautoescape %}</div></center>
+        </div>
+        </div>
+        <hr style="color:white" width="100%">
+          <br>
+            <div class="container">
+              <div class="row gx-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="company">Casting Company</label>
+                    <input type="text" name="company" id="company"  class="form-control" value="{{up.castingteam_company}}" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="producer">Producer</label>
+                    <input type="text" name="producer" id="producer" value="{{up.castingteam_producer}}"  class="form-control" required>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+              <hr>
+              <br>
+
+              <div class="row gx-3">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="address">Company Address</label>
+                    <textarea name="address" id="address" cols="30" rows="3" required>{{up.castingteam_address}}</textarea>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" name="city" id="city"  class="form-control" value="{{up.castingteam_city}}"  required>
+                  </div>
+                  <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" name="country" id="country"  value="{{up.castingteam_country}}" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" name="state" id="state"  class="form-control" value="{{up.castingteam_state}}" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="pin">Pin Code</label>
+                    <input type="text" name="pin" id="pin" value="{{up.castingteam_pincode}}"  class="form-control" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row gx-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="contact">Contact Number</label>
+                    <input type="text" name="contact" id="contact" value="{{up.castingteam_contact}}"  class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" value="{{up.castingteam_email}}"  class="form-control" required>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+              <hr>
+              <br>
+              <div class="row gx-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="uname">Username</label>
+                    <input type="text" name="uname" id="uname" value="{{lg.uname}}"  class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <br>
+                    <button type="submit" name="btn" class="btn btn-warning form-control">Update</button>
+                  </div>
+                </div>
+              </div>
+
+              <br><br>
+            </div>
+        </div>
+        <br>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</form>
+{% endblock %}

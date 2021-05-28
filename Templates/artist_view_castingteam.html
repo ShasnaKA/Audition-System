@@ -1,0 +1,71 @@
+{% extends 'myapp/artist_base.html' %}
+{% load static %}
+{% block title %} Casting Companies{% endblock %}
+{% block comp_active %} active {% endblock %}
+
+{% block body %}
+<br><br><br><br>
+<div class="container">
+    <form name="frm">
+        <section style="background-color:#a7aeb1  ">
+            <br>
+            <center>
+                <h3 style="color: #283747 "><b>CASTING COMPANIES</b></h3>
+                <h5><em>{% autoescape off %} {{msg}} {% endautoescape %}</em></h5>
+            </center>
+            <br>
+        </section><br>
+        <table class="table table-striped auto-index ">
+            <thead class="thead-dark">
+            <tr>
+                <th>Sl.No</th>
+                <th>Company</th>
+                <th>Producer</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Pincode</th>
+                <th>Contact</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cst in castingteam_list %}
+            <tr>
+                <td></td>
+                <td>{{cst.castingteam_company}}</td>
+                <td>{{cst.castingteam_producer}}</td>
+                <td>{{cst.castingteam_address}}</td>
+                <td>{{cst.castingteam_city}}</td>
+                <td>{{cst.castingteam_state}}</td>
+                <td>{{cst.castingteam_country}}</td>
+                <td>{{cst.castingteam_pincode}}</td>
+                <td>{{cst.castingteam_contact}}</td>
+                <td>{{cst.castingteam_email}}</td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br><br>
+        <center>{% autoescape off%} {{empty_msg}} {% endautoescape %}</center>
+    </form>
+</div>
+<br><br><br><br><br><br><br>
+
+<style>
+form
+{
+    counter-reset:Serial;
+}
+table
+{
+}
+.auto-index td:first-child:before
+{
+    counter-increment:Serial; /* Increment Serial Number*/
+    content:counter(Serial); /* Display the counter*/
+}
+</style>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'myapp/artist_base.html' %}
+{% load static %}
+{% block title %} View Casting Calls {% endblock %}
+{% block call_active %} active {% endblock %}
+
+{% block body %}
+<br><br><br><br>
+<div class="container">
+    <form name="frm">
+        <section style="background-color:#a7aeb1  ">
+            <br>
+            <center><h3 style="color: #283747 "><b>Casting Calls</b></h3></center>
+            <br>
+        </section><br>
+        <table class="table table-striped auto-index ">
+            <thead class="thead-dark">
+            <tr>
+                <th>Sl.No</th>
+                <th>Posted Date/Time</th>
+                <th>Casting Company</th>
+                <th>Character</th>
+                <th>Role Description</th>
+                <th>Preferred Gender</th>
+                <th>Casting Type</th>
+                <th>Age Group</th>
+                <th>Last Date</th>
+                <th>Job Duration</th>
+                <th>Plot (If Any)</th>
+                <th>Action</th>
+                <th>My Applications</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cl in call_list %}
+            <tr>
+                <td></td>
+                {% for prd in prod_list %}
+                {% if prd.id == cl.castingteam_prod_categid %}
+                    <td>{{cl.posted_date}}|{{cl.posted_time}}</td>
+                    {% for cst in castingteam_list %}
+                        {% if cl.castingteam_id == cst.castingteam_login_id %}
+                            <td>{{cst.castingteam_company}}</td>
+                        {% endif %}
+                    {% endfor %}
+                    <td><b>{{cl.character}}</b></td>
+                    <td>{{cl.role_desc}}</td>
+                    {% if cl.gender == 'M' %}
+                        <td>Male</td>
+                    {% endif %}
+                    {% if cl.gender == 'F' %}
+                        <td>Female</td>
+                    {% endif %}
+                    {% if cl.gender == 'Any' %}
+                        <td>{{cl.gender}}</td>
+                    {% endif %}
+                    <td><b>{{prd.prod_categ}}</b></td>
+                    <td>{{cl.age_from}}-{{cl.age_to}}</td>
+                    <td>{{cl.call_expiry}}</td>
+                    <td>{{cl.job_duration}}</td>
+                    {% for pl in plot_list %}
+                        {% if cl.id == pl.plot_castingcall_id %}
+                        <td><a href="../artist_view_plot?plot_castingcall_id={{cl.id}}">View Plot</a></td>
+                        {% else  %}
+                        <td style="color:gray">--None--</td>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% endfor %}
+                <td>
+                    <button class="btn btn-primary" style="width:100px"><a href="../artist_casting_application_add?appl_castingcall_id={{cl.id}}" style="color:#fff;text-decoration:none">Apply</a></button>
+                </td>
+                <td>
+                    <button class="btn btn-secondary" style="width:100px"><a href="../artist_casting_application_view?castingcall_id={{cl.id}}" style="color:#fff;text-decoration:none">My Applc</a></button>
+                </td>
+
+                <td>
+                    {% for al in appl_list %}
+                    {% if cl.id == al.appl_castingcall_id %}
+                        {% if al.application_status == 1 %}
+                            <td style="color:green">
+                                <em>Applied</em>
+                            </td>
+                        {% endif %}
+                    {% endif %}
+                    {% endfor %}
+
+                    {% for al in appl_list %}
+                    {% if cl.id not in al.appl_castingcall_id %}
+                    <td style="color:blue">
+                        <i>New</i>
+                    </td>
+                    {% endif %}
+                    {% endfor %}
+                </td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br><br>
+        <center>{% autoescape off%} {{empty_msg}} {% endautoescape %}</center>
+    </form>
+</div>
+
+<style>
+form
+{
+    counter-reset:Serial;
+}
+table
+{
+}
+.auto-index td:first-child:before
+{
+    counter-increment:Serial; /* Increment Serial Number*/
+    content:counter(Serial); /* Display the counter*/
+}
+</style>
+{% endblock %}

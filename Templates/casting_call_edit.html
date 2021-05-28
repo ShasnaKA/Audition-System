@@ -1,0 +1,124 @@
+{% extends 'myapp/castingteam_base.html' %}
+{% block title %} Edit Casting Calls{% endblock %}
+{% block call_active %} active {% endblock %}
+
+{% block body %}
+<style>
+     .formspace{
+     background: rgb(112,180,58);
+background: linear-gradient(90deg, rgba(112,180,58,1) 2%, rgba(29,253,122,1) 16%, rgba(239,252,69,1) 98%);
+      padding:25px;
+    }
+</style>
+<br><br><br><br>
+<form role="form" name="form" action="casting_call_edit" method="post">
+    {% csrf_token %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 formspace">
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <br><br>
+                    <center>
+                        <h2><b>EDIT CASTING CALLS</b></h2>
+                        {% autoescape off%} {{msg}} {% endautoescape %}
+                    </center>
+                    <br>
+                        <div class="form-group">
+                            <label for="character">Character</label>
+                            <input type="text" name="character" id="character" class="form-control" value="{{call.character}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role_desc">Role Description</label>
+                            <textarea name="role_desc" id="role_desc" cols="40" rows="3" required>{{call.role_desc}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender</label>
+                            <select name="gender" id="gender" class="form-control" required>
+                                {% if call.gender == 'Any' %}
+                                    <option value="Any" selected>Any</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+                                {% elif call.gender == 'M' %}
+                                    <option value="Any">Any</option>
+                                    <option value="M" selected>Male</option>
+                                    <option value="F">Female</option>
+                                {% else %}
+                                    <option value="Any">Any</option>
+                                    <option value="M">Male</option>
+                                    <option value="F" selected>Female</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="castingteam_prod_categid">Production Type</label>
+                            <select name="castingteam_prod_categid" id="castingteam_prod_categid" class="form-control" required>
+                                <!--option value="none">--Select--</option-->
+                                {% for cst_prd in castingteam_prods_list %}
+                                    {% for prd in prod_master_list %}
+                                        {% if prd.id == cst_prd.castingteam_prod_categid %}
+                                            {% if prd.id == call.castingteam_prod_categid %}
+                                            <option value="{{call.castingteam_prod_categid}}" selected>{{prd.prod_categ}}</option>
+                                            {% else %}
+                                            <option value="{{prd.id}}">{{prd.prod_categ}}</option>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <br>
+                        <br>
+                    <div class="form-group">
+                            <center>
+                                <button type="submit" name="btn1" id="btn1" class="btn btn-success form-control">Update</button>
+                            </center>
+                    </div>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 formspace">
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <br><br><br><br>
+                    <br>
+                    <div class="form-group">
+                        <label for="age_from">Age From</label>
+                        <input type="text" name="age_from" id="age_from" class="form-control" value="{{call.age_from}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age_to">Age To</label>
+                        <input type="text" name="age_to" id="age_to" class="form-control"  value="{{call.age_to}}" required>
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                        <label for="call_expiry">Call Expires On</label>
+                        <input type="date" name="call_expiry" id="call_expiry" class="form-control" value="{{call.call_expiry}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="job_duration">Job Duration</label>
+                        <input type="text" name="job_duration" id="job_duration" class="form-control"  value="{{call.job_duration}}" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="id" id="id" value="{{call.id}}" required>
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                        <center>
+                            <button type="reset" name="btn2" id="btn2" class="btn btn-danger form-control">Cancel</button>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+</form>
+<br><br><br>
+{% endblock %}

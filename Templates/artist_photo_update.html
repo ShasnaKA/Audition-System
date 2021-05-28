@@ -1,0 +1,86 @@
+{% extends 'myapp/artist_base.html' %}
+{% load static %}
+{% block change_pswd_active %}active{% endblock %}
+{% block title %}Artist Photo Update{% endblock %}
+{% block body %}
+<style>
+  a{
+    color:#fff;
+    text-decoration:none;
+  }
+  a:hover{
+    color:#fff;
+  }
+
+  .clip{
+  clip-path: polygon(100% 0, 91% 33%, 54% 60%, 15% 35%, 0 0);
+
+  }
+
+  .gradient-class{
+    background: rgb(58,95,180);
+background: linear-gradient(90deg, rgba(58,95,180,1) 2%, rgba(115,29,253,1) 44%, rgba(69,202,252,1) 86%);
+  }
+  .gradient-class2{
+     background: rgb(58,95,180);
+background: linear-gradient(90deg, rgba(58,95,180,1) 2%, rgba(253,29,135,1) 63%, rgba(239,252,69,1) 95%);
+  }
+
+  label{
+    color:#fff;
+    font-size:18px;
+  }
+
+</style>
+<br><br>
+
+<div class="container-fluid gradient-class">
+  <br>
+    <section style="height:30%">
+            <center><br><h2><b style="color: #fff ;font-family:'Alfa Slab One',cursive;font-family:'Russo One',sans-serif;">Change Profile Picture</b></h2></center>
+    </section>
+  </div>
+
+<div class="container-fluid gradient-class2">
+    <form role="form" name="frm" action="{% url 'artist_photo_update' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+        <br><br>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <center>
+                <div class="form-group">
+                    <img src="../static/myapp/media/{{pic_path}}" width="180" height="180" alt="Profile Picture">
+                </div>
+                </center>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="photo">New Profile Photo</label>
+                    <input type="file" name="photo" id="photo" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <br><br>
+                    <button type="submit" name="btn" id="btn" class="form-control btn btn-primary">Change</button>
+                </div>
+                <div class="form-group">
+                    <br><br>
+                    <button type="reset" name="btn" id="btn" class="form-control btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </form>
+    <br>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'myapp/base_index.html' %}
+{% block home_active %}active{% endblock %}
+
+{% load static %}
+{% block title %}
+Cast 'N' Play
+{% endblock %}
+{% block background %}background="{% static './myapp/images/face1.jpg' %}"{% endblock %}
+
+{% block body %}
+
+<!--center>
+    <img src="{% static './myapp/images/face1.jpg' %}" width="600" height="400">
+</center-->
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'myapp/castingteam_base.html' %}
+{% load static %}
+{% block title %} View Artists {% endblock %}
+{% block art_active %} active {% endblock %}
+
+{% block body %}
+<br><br><br><br>
+<div class="container">
+    <form name="frm">
+        <section style="background-color:#a7aeb1  ">
+            <br>
+            <center><h3 style="color: #283747 "><b>Artists</b></h3></center>
+            <br>
+        </section><br>
+        <table class="table table-striped auto-index ">
+            <thead class="thead-dark">
+            <tr>
+                <th>Sl.No</th>
+                <th>Artist</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>Working Title</th>
+                <th>Compensation Expected</th>
+                <th>Bio</th>
+                <th>Profile</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ll in login_list %}
+            {% for arl in arl_list %}
+            {% if ll.id == arl.art_login_id %}
+            <tr>
+                    <td></td>
+                    <td>{{arl.art_fname}} {{arl.art_lname}}</td>
+                    {% if arl.art_gender == 'M' %}
+                        <td>Male</td>
+                    {% elif arl.art_gender == 'F' %}
+                        <td>Female</td>
+                    {% else %}
+                        <td>Other</td>
+                    {% endif %}
+                    <td>{{arl.art_age}}</td>
+                    <td>{{arl.art_address}} {{arl.art_city}} {{arl.art_state}} {{arl.art_country}}</td>
+                    <td>{{arl.art_work_title}}</td>
+                    <td>{{arl.art_compensation}}</td>
+                    <td>{{arl.art_bio}}</td>
+                    <td><img src="../static/myapp/media/{{arl.art_headphoto}}" width="140" height="140" alt="Profile Picture"></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br><br>
+        <center>{% autoescape off%} {{empty_msg}} {% endautoescape %}</center>
+    </form>
+</div>
+
+<style>
+form
+{
+    counter-reset:Serial;
+}
+table
+{
+}
+.auto-index td:first-child:before
+{
+    counter-increment:Serial; /* Increment Serial Number*/
+    content:counter(Serial); /* Display the counter*/
+}
+</style>
+{% endblock %}

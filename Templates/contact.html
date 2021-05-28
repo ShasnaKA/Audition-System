@@ -1,0 +1,66 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block contact_active %}active{% endblock %}
+{% block title %}
+Contact Us
+{% endblock %}
+{% block body %}
+<style>
+    .container{
+        color: #fff ;
+    }
+</style>
+<br><br>
+<center>
+    <img src="{% static './myapp/images/contact_us.png' %}" width="600" height="300">
+</center>
+<div style="background-color: #581845 ">
+    <form role="form" name="form" action="{% url 'contact' %}" method="post">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                                  <center><section style="color:#fff"><h1>Write to Us</h1></section>
+                                      </center>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="contact">Contact Number</label>
+                                <input type="text" name="contact" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <br>
+                                <textarea name="msg" id="msg" cols="30" rows="6" class="form-control" placeholder="Your Message"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <br>
+                                <button type="submit" name="btn" class="form-control btn btn-primary">SEND</button>
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </form>
+    <br>
+
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'myapp/artist_base.html' %}
+{% load static %}
+{% block title %}Artist-Home{% endblock %}
+{% block background %}background="{% static './myapp/images/face1.jpg' %}"{% endblock %}
+{% block home_active %}active{% endblock %}
+{% block body %}
+<center>
+        <h2><font color="#366092">Welcome {{ uname}}</font></h2>
+
+
+</center>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br>
+
+{% endblock %}

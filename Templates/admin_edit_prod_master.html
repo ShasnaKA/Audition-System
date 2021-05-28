@@ -1,0 +1,75 @@
+{% extends 'myapp/admin_base.html' %}
+{% block title %} Edit Productions{% endblock %}
+{% block prod_active %} active {% endblock %}
+
+{% block body %}
+<style>
+     .formspace{
+      background-color: #cdccd4  ;
+    }
+</style>
+<br><br><br><br>
+<div class="container">
+    <br><br>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 formspace">
+            <br>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+
+                    <br><br>
+                    <center>
+                        <h2><b>EDIT PRODUCTION TYPE</b></h2>
+                        {% autoescape off%} {{msg}} {% endautoescape %}
+                    </center>
+                    <br>
+
+                    <form role="form" name="form" action="admin_edit_prod_master" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="prod_categ">Production Type</label>
+                            <input type="text" name="prod_categ" id="prod_categ" class="form-control" value="{{prod_master_list.prod_categ}}" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="emotion_capture">Emotion Capture</label>
+                            <select name="emotion_capture" id="emotion_capture" class="form-control" required>
+                                {% if prod_master_list.emotion_capture == 1 %}
+                                <option value="{{prod_master_list.emotion_capture}}" selected>Enabled</option>
+                                <option value="0" >Diabled</option>
+                                {% else %}
+                                <option value="1" >Enabled</option>
+                                <option value="{{prod_master_list.emotion_capture}}" selected>Disabled</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" name="id" id="id" value="{{prod_master_list.id}}">
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <center>
+                                <button type="submit" name="btn1" id="btn1" class="btn btn-success form-control">Update</button>
+                            </center>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <center>
+                                <button type="reset" name="btn2" id="btn2" class="btn btn-danger form-control">Cancel</button>
+                            </center>
+                        </div>
+                        <input type="hidden" name="prod_id" value="{{prod_master_list.id}}">
+                        <br><br>
+                    </form>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+<br><br><br>
+{% endblock %}

@@ -1,0 +1,231 @@
+{% extends 'myapp/base.html' %}
+{% block reg_active %}active{% endblock %}
+{% block title %} Cast 'N' Play - Artist Sign Up{% endblock %}
+{% block body %}
+<style>
+  a{
+    color:#fff;
+    text-decoration:none;
+  }
+  a:hover{
+    color:#fff;
+  }
+
+  .clip{
+  clip-path: polygon(100% 0, 91% 33%, 54% 60%, 15% 35%, 0 0);
+
+  }
+
+  .gradient-class{
+   background: rgb(19,21,21);
+background: linear-gradient(90deg, rgba(19,21,21,1) 4%, rgba(221,225,46,1) 100%);
+  }
+
+  label{
+    color:#fff;
+    font-size:18px;
+  }
+
+</style>
+<br><br>
+
+<div class="container-fluid gradient-class">
+  <br>
+  <form role="form" name="frm" action="{% url 'artist_reg' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-md-4 clip" style="background-color: #FFC300 ">
+      <br><br><br><br>
+      <h3 class="text-center"><strong>Sign Up Here</strong></h3>
+      <br><br>
+      <div class="text-center">
+        <button role="button" class="btn btn-danger form-control">
+          <a href="{% url 'artist_reg' %}" class="nav-link active">Artist</a>
+        </button>
+      </div>
+      <br>
+      <div class="text-center">
+        <button role="button" class="btn btn-secondary form-control">
+          <a href="{% url 'castingteam_reg' %}">Casting Company</a>
+        </button>
+      </div>
+      <br><br><br>
+      <b><strong><h6><a href="{% url 'artist_login' %}" style="color:green;text-decoration:none; margin-left:28%">Existing Users ? Click Here to <i style="color:red">Log In </i></a></h6></strong></b>
+    </div>
+
+    <div class="col-md-8">
+      <div id="artist_panel">
+        <br>
+        <div class="container-fluid" >
+        <div class="row">
+          <!--h3 class="text-center" style="color:#fff"><strong>Register as an Artist</strong></h3-->
+          <section style="height:30%">
+            <center><br><h2><b style="color: #e8102a ;font-family:'Alfa Slab One',cursive;font-family:'Russo One',sans-serif;">Sign Up - Artist</b></h2></center>
+          </section>
+          <center><div class="msg">{% autoescape off %} {{msg}} {% endautoescape %}</div></center>
+        </div>
+        </div>
+        <hr style="color:white" width="100%">
+          <br>
+            <div class="container">
+              <div class="row gx-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input type="text" name="fname" id="fname"  class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" name="lname" id="lname"  class="form-control" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row gx-3">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" name="dob" id="dob" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="text" name="age" id="age" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select name="gender" id="gender" class="form-control" required>
+                      <option value="none">--Select Gender--</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
+                      <option value="O">Other</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+              <hr>
+              <br>
+
+              <div class="row gx-3">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="address">Permanent Address</label>
+                    <textarea name="address" id="address" cols="30" rows="3" placeholder="Address" required></textarea>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" name="city" id="city"  class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" name="country" id="country"  class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" name="state" id="state"  class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="pin">Pin Code</label>
+                    <input type="text" name="pin" id="pin"  class="form-control" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row gx-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="contact">Contact Number</label>
+                    <input type="text" name="contact" id="contact"  class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email"  class="form-control" required>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+              <hr>
+              <br>
+
+              <div class="row gx-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="work_title">Working Title</label>
+                    <input type="text" name="work_title" id="work_title"  placeholder="Current Working Title" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="compensation">Compensation Expected</label>
+                    <select name="compensation" id="compensation" class="form-control" required>
+                      <option value="none">--Select--</option>
+                      <option value="Paid">Paid</option>
+                      <option value="Free">Free</option>
+                      <option value="Any">Any</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row gx-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="bio">Self Description</label>
+                    <textarea name="bio" id="bio" cols="35" rows="2" placeholder="Bio" required></textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="headphoto">Upload Photo</label>
+                    <input type="file" name="headphoto" id="headphoto" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+              <div class="row gx-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="uname">Username</label>
+                    <input type="text" name="uname" id="uname" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="cnfpswd"> Confirm Password</label>
+                    <input type="password" name="cnfpswd" id="cnfpswd"  placeholder="Use special symbols, lower and uppercase" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="pswd">Set a Password</label>
+                    <input type="password" name="pswd" id="pswd"  placeholder="Use special symbols, lower and uppercase" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <br>
+                    <button type="submit" name="btn" class="btn btn-danger form-control">Register</button>
+                  </div>
+                </div>
+              </div>
+
+              <br><br>
+            </div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'myapp/castingteam_base.html' %}
+{% load static %}
+{% block title %} My Productions {% endblock %}
+{% block prod_active %} active {% endblock %}
+
+{% block body %}
+<br><br><br><br>
+<div class="container">
+    <form name="frm">
+        <section style="background-color:#a7aeb1  ">
+            <br>
+            <center><h3 style="color: #283747 "><b>MY PRODUCTION TYPES</b></h3></center>
+            <br>
+        </section><br>
+        <table class="table table-striped auto-index ">
+            <thead class="thead-dark">
+            <tr>
+                <th>Sl.No</th>
+                <th>Production Type</th>
+                <th>Emotion Capturing</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cst_prd in castingteam_prods_list %}
+            <tr>
+                <td></td>
+                {% for prd in prod_master_list %}
+                {% if prd.id == cst_prd.castingteam_prod_categid %}
+                    <td>{{prd.prod_categ}}</td>
+                    {% if prd.emotion_capture == 1 %}
+                    <td>Enabled</td>
+                    {% else %}
+                    <td>Disabled</td>
+                    {% endif %}
+                {% endif %}
+                {% endfor %}
+                <td>
+                    <button class="btn btn-danger" style="width:100px"><a href="./castingteam_prods_delete?id={{cst_prd.id}}" style="color:#fff;text-decoration:none">Remove</a></button>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br><br>
+        <center>{% autoescape off%} {{empty_msg}} {% endautoescape %}</center>
+    </form>
+</div>
+
+<style>
+form
+{
+    counter-reset:Serial;
+}
+table
+{
+}
+.auto-index td:first-child:before
+{
+    counter-increment:Serial; /* Increment Serial Number*/
+    content:counter(Serial); /* Display the counter*/
+}
+</style>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'myapp/admin_base.html' %}
+{% block title %} Add Productions{% endblock %}
+{% block prod_active %} active {% endblock %}
+
+{% block body %}
+<style>
+     .formspace{
+      background-color: #cdccd4  ;
+    }
+</style>
+<br><br><br><br>
+<div class="container">
+    <br><br>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 formspace">
+            <br>
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+
+                    <br><br>
+                    <center>
+                        <h2><b>ADD PRODUCTION TYPE</b></h2>
+                        {% autoescape off%} {{msg}} {% endautoescape %}
+                    </center>
+                    <br>
+
+                    <form role="form" name="form" action="admin_add_prod_master" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="prod_categ">Production Type</label>
+                            <input type="text" name="prod_categ" id="prod_categ" class="form-control" placeholder="Eg: Films , TV Shows, Music" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="emotion_capture">Emotion Capture</label>
+                            <select name="emotion_capture" id="emotion_capture" class="form-control" required>
+                                <option value="1">Enable</option>
+                                <option value="0">Disable</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <center>
+                                <button type="submit" name="btn1" id="btn1" class="btn btn-success form-control">Add Productions</button>
+                            </center>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <center>
+                                <button type="reset" name="btn2" id="btn2" class="btn btn-danger form-control">Cancel</button>
+                            </center>
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+<br><br><br>
+{% endblock %}

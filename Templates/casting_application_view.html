@@ -1,0 +1,109 @@
+{% extends 'myapp/castingteam_base.html' %}
+{% load static %}
+{% block title %} View Applications{% endblock %}
+{% block cartll_active %} active {% endblock %}
+
+{% block body %}
+<br><br><br><br>
+<div class="container">
+    <form name="frm">
+        <section style="background-color:#a7aeb1  ">
+            <br>
+            <center><h3 style="color: #283747 "><b><span style="color: #3d5eda ">Applications for - </span><span style="color:green">{{char}}</span></b></h3></center>
+            <br>
+        </section><br>
+        <table class="table table-striped auto-index ">
+            <thead class="thead-dark">
+            <tr>
+                <th>Sl.No</th>
+                <th>Artist</th>
+                <th>Age</th>
+                <th>Compensation</th>
+                <th>Bio</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <!--th>Photo</th-->
+                <th>Video (if any)</th>
+                <th>Appl.Status</th>
+                <th>Emotion Count (If Any)</th>
+                <th colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for al in appl_list %}
+            <tr>
+                {% for artl in art_list %}
+                {% if al.appl_art_id == artl.art_login_id %}
+                <td></td>
+                <td><b>{{artl.art_fname}} {{artl.art_lname}}</b></td>
+                <td>{{artl.art_age}}</td>
+                <td>{{artl.art_compensation}}</td>
+                <td>{{artl.art_bio}}</td>
+                <td>{{artl.art_contact}}</td>
+                <td>{{artl.art_email}}</td>
+                {% endif %}
+                {% endfor %}
+
+                {% for vd in video_list %}
+
+                    {% if al.id == vd.application_id %}
+                        <td><embed src="../static/myapp/media/{{ vd.video_file }}"></embed></td>
+                    {% elif al.id not in vd.application_id %}
+                        <td>--None--</td>
+                    {% else %}
+                        <td style="color:blue">NIL</td>
+                    {% endif %}
+
+                    {% if al.id == vd.application_id %}
+                        {% if al.application_result == 'Unchecked' %}
+                            <td style="color:grey">Unchecked</td>
+                        {% elif al.application_result == 'Accepted' %}
+                            <td style="color:green">Accepted</td>
+                        {% else %}
+                            <td style="color:red">Rejected</td>
+                        {% endif %}
+
+                        <td>{{al.result}}</td>
+                    {% else %}
+                        {% if al.application_result == 'Unchecked' %}
+                            <td style="color:grey">Unchecked</td>
+                        {% elif al.application_result == 'Accepted' %}
+                            <td style="color:green">Accepted</td>
+                        {% else %}
+                            <td style="color:red">Rejected</td>
+                        {% endif %}
+
+                        <td>{{al.result}}</td>
+                    {% endif %}
+
+                {% endfor %}
+                <td>
+                    <button class="btn btn-success" style="width:100px"><a href="./castingteam_accept_reject_appl?appl_id={{al.id}}&status=1" style="color:#fff;text-decoration:none">Accept</a></button>
+                    <button class="btn btn-danger" style="width:100px"><a href="./castingteam_accept_reject_appl?appl_id={{al.id}}&status=-1" style="color:#fff;text-decoration:none">Reject</a></button>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br><br>
+        <center>{% autoescape off%} {{empty_msg}} {% endautoescape %}
+            <button class="btn btn-secondary" style="width:100px"><a href="./casting_call_view" style="color:#fff;text-decoration:none">Go Back</a></button>
+        </center>
+    </form>
+</div>
+<br><br>
+<style>
+form
+{
+    counter-reset:Seriartl;
+}
+table
+{
+}
+.auto-index td:first-child:before
+{
+    counter-increment:Seriartl; /* Increment Seriartl Number*/
+    content:counter(Seriartl); /* Display the counter*/
+}
+</style>
+{% endblock %}

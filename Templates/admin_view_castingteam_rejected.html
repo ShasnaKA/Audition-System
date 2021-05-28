@@ -1,0 +1,75 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %} Casting Teams - Rejected {% endblock %}
+{% block approval_active %} active {% endblock %}
+
+{% block body %}
+<br><br><br><br>
+<div class="container">
+    <form name="frm">
+        <section style="background-color:#a7aeb1  ">
+            <br>
+            <center><h3 style="color: #283747 "><b>CASTING TEAM - REJECTED</b></h3></center>
+            <br>
+        </section><br>
+        <table class="table table-striped auto-index ">
+            <thead class="thead-dark">
+            <tr>
+                <th>Sl.No</th>
+                <th>Casting Company</th>
+                <th>Producer
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
+                <th>Pin Code</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cst_login in cst_login_list %}
+            {% for cst in castingteam_list %}
+            {% if cst_login.id == cst.castingteam_login_id %}
+            <tr>
+                <td></td>
+                <td><b>{{cst.castingteam_company}}</b></td>
+                <td>{{cst.castingteam_producer}}</td>
+                <td>{{cst.castingteam_address}}</td>
+                <td>{{cst.castingteam_city}}</td>
+                <td>{{cst.castingteam_state}}</td>
+                <td>{{cst.castingteam_country}}</td>
+                <td>{{cst.castingteam_pincode}}</td>
+                <td>{{cst.castingteam_contact}}</td>
+                <td>{{cst.castingteam_email}}</td>
+                <td>
+                    <button class="btn btn-success" style="width:100px"><a href="./admin_approvals_castingteam?login_id={{cst_login.id}}&status=1&page=3" style="color:#fff;text-decoration:none">Reapprove</a></button>
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br><br>
+        <center>{% autoescape off%} {{empty_msg}} {% endautoescape %}</center>
+    </form>
+</div>
+<br><br><br><br><br><br><br><br><br><br>
+
+<style>
+form
+{
+    counter-reset:Serial;
+}
+table
+{
+}
+.auto-index td:first-child:before
+{
+    counter-increment:Serial; /* Increment Serial Number*/
+    content:counter(Serial); /* Display the counter*/
+}
+</style>
+{% endblock %}

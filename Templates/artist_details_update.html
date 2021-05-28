@@ -1,0 +1,208 @@
+{% extends 'myapp/artist_base.html' %}
+{% block change_pswd_active %}active{% endblock %}
+{% block title %}Artist Profile Update{% endblock %}
+{% block body %}
+<style>
+  a{
+    color:#fff;
+    text-decoration:none;
+  }
+  a:hover{
+    color:#fff;
+  }
+
+  .clip{
+  clip-path: polygon(100% 0, 91% 33%, 54% 60%, 15% 35%, 0 0);
+
+  }
+
+  .gradient-class{
+    background: rgb(58,95,180);
+background: linear-gradient(90deg, rgba(58,95,180,1) 2%, rgba(115,29,253,1) 44%, rgba(69,202,252,1) 86%);
+  }
+
+  label{
+    color:#fff;
+    font-size:18px;
+  }
+
+</style>
+<br><br>
+
+<div class="container-fluid gradient-class">
+  <br>
+  <form role="form" name="frm" action="{% url 'artist_details_update' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="row">
+	  <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div id="artist_panel">
+        <br>
+        <div class="container-fluid" >
+        <div class="row">
+          <!--h3 class="text-center" style="color:#fff"><strong>Register as an Artist</strong></h3-->
+          <section style="height:30%">
+            <center><br><h2><b style="color: #fff ;font-family:'Alfa Slab One',cursive;font-family:'Russo One',sans-serif;">Artist- Profile Update</b></h2></center>
+          </section>
+          <center><div class="msg">{% autoescape off %} {{msg}} {% endautoescape %}</div></center>
+        </div>
+        </div>
+        <hr style="color:white" width="100%">
+          <br>
+            <div class="container">
+              <div class="row gx-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input type="text" name="fname" id="fname"  class="form-control" value="{{up.art_fname}}" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input type="text" name="lname" id="lname"  class="form-control" value="{{up.art_lname}}" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row gx-3">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" name="dob" id="dob" class="form-control" value="{{up.art_DOB}}" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="text" name="age" id="age" class="form-control" value="{{up.art_age}}" required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select name="gender" id="gender" class="form-control" required>
+						{% if up.art_gender == 'M' %}
+							  <option value="M" selected>Male</option>
+							  <option value="F">Female</option>
+							  <option value="O">Other</option>
+						{% elif up.art_gender == 'F' %}
+							<option value="M">Male</option>
+						  	<option value="F" selected>Female</option>
+						  	<option value="O">Other</option>
+						{% else %}
+							<option value="M">Male</option>
+						  	<option value="F">Female</option>
+						  	<option value="O" selected>Other</option>
+						{% endif %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+              <hr>
+              <br>
+
+              <div class="row gx-3">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="address">Permanent Address</label>
+                    <textarea name="address" id="address" cols="30" rows="3" placeholder="Address" required> {{up.art_address}}</textarea>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" name="city" id="city"  class="form-control" value="{{up.art_city}}"  required>
+                  </div>
+                  <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" name="country" id="country"  class="form-control" value="{{up.art_country}}"  required>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" name="state" id="state"  class="form-control" value="{{up.art_state}}"  required>
+                  </div>
+                  <div class="form-group">
+                    <label for="pin">Pin Code</label>
+                    <input type="text" name="pin" id="pin"  class="form-control"  value="{{up.art_pin}}" required>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row gx-4">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="contact">Contact Number</label>
+                    <input type="text" name="contact" id="contact"  class="form-control"  value="{{up.art_contact}}" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email"  class="form-control"  value="{{up.art_email}}" required>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+              <hr>
+              <br>
+
+              <div class="row gx-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="work_title">Working Title</label>
+                    <input type="text" name="work_title" id="work_title"  value="{{up.art_work_title}}"  class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="compensation">Compensation Expected</label>
+                    <select name="compensation" id="compensation" class="form-control" required>
+						{% if up.art_compensation == 'Paid' %}
+						  <option value="Paid" selected>Paid</option>
+						  <option value="Free">Free</option>
+						  <option value="Any">Any</option>
+						{% elif up.art_compensation == 'Free' %}
+							<option value="Paid">Paid</option>
+						  <option value="Free" selected>Free</option>
+						  <option value="Any">Any</option>
+						{% else %}
+						<option value="Paid">Paid</option>
+						  <option value="Free">Free</option>
+						  <option value="Any" selected>Any</option>
+						{% endif %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row gx-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="bio">Self Description</label>
+                    <textarea name="bio" id="bio" cols="35" rows="2" placeholder="Bio" required>{{up.art_bio}} </textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+					  <br><br>
+                    <button type="submit" name="btn" class="btn btn-warning form-control">Update</button>
+                  </div>
+                </div>
+              </div>
+
+               <br><br>
+            </div>
+        </div>
+        <br>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</form>
+{% endblock %}

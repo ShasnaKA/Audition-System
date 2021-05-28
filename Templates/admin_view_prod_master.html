@@ -1,0 +1,65 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %} Casting Productions {% endblock %}
+{% block prod_active %} active {% endblock %}
+
+{% block body %}
+<br><br><br><br>
+<div class="container">
+    <form name="frm">
+        <section style="background-color:#a7aeb1  ">
+            <br>
+            <center>
+                <h3 style="color: #283747 "><b>PRODUCTION TYPES</b></h3>
+                <h5><em>{% autoescape off %} {{msg}} {% endautoescape %}</em></h5>
+            </center>
+            <br>
+        </section><br>
+        <table class="table table-striped auto-index ">
+            <thead class="thead-dark">
+            <tr>
+                <th>Sl.No</th>
+                <th>Casting Type</th>
+                <th>Emotion Capturing</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for prd in prod_master_list %}
+            <tr>
+                <td></td>
+                <td>{{prd.prod_categ}}</td>
+                {% if prd.emotion_capture == 1 %}
+                <td>Enabled</td>
+                {% else %}
+                <td>Disabled</td>
+                {% endif %}
+                <td>
+                    <button class="btn btn-danger" style="width:100px"><a href="./admin_delete_prod_master?id={{prd.id}}" style="color:#fff;text-decoration:none">Remove</a></button>
+                    <button class="btn btn-success" style="width:100px"><a href="./admin_edit_prod_master?id={{prd.id}}" style="color:#fff;text-decoration:none">Edit</a></button>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <br><br><br>
+        <center>{% autoescape off%} {{empty_msg}} {% endautoescape %}</center>
+    </form>
+</div>
+<br><br><br><br><br><br><br>
+
+<style>
+form
+{
+    counter-reset:Serial;
+}
+table
+{
+}
+.auto-index td:first-child:before
+{
+    counter-increment:Serial; /* Increment Serial Number*/
+    content:counter(Serial); /* Display the counter*/
+}
+</style>
+{% endblock %}
