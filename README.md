@@ -1,0 +1,2 @@
+# AuditionSystem
+A virtual Audition System using Sentiment Analysis done using Python-Django. It consists of 3 users: - Admin, Casting Company, Artist. The system works by Artists applying for acting roles where Audition happens by uploading a video depicting a given emotion. The system automatically detects the sentiment expressed throughout the video and assessing its acceptability. The sentiments included is Happy, Sad, Fear, Anger and Disgust.
